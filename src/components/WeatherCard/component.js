@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Location from "./Location";
+import Icon from "./Icon";
+import Condition from "./Condition";
 
 const WeatherCard = (props) => {
-  const red = 90;
+  let temp = 15;
+  let highColor = (1 - (temp - 12) / 28) * 255;
+  let lowColor = highColor - 150;
   const Card = styled.div`
     margin: 0 auto;
-    background: linear-gradient(to bottom, rgba(${red}, 200, 200), lightblue);
+    background: linear-gradient(
+      to top,
+      rgba(255, ${highColor}, 0),
+      rgb(255, ${lowColor}, 0)
+    );
     width: 200px;
     height: 240px;
     display: flex;
@@ -15,12 +23,12 @@ const WeatherCard = (props) => {
     align-items: center;
     border-radius: 15px;
   `;
+
   return (
     <Card>
       <Location />
-      <img className="icon" src="./images/cloudy.png" alt="Weather Icon" />
-      <h1 className="temp">20 ˚C</h1>
-      <h3 className="condition">Clouds</h3>
+      <Icon />
+      <Condition temp={temp} />
     </Card>
   );
 };
