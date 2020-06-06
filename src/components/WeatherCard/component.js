@@ -5,8 +5,8 @@ import Icon from "./Icon";
 import Condition from "./Condition";
 
 const WeatherCard = (props) => {
-  let temp = 15;
-  let highColor = (1 - (temp - 12) / 28) * 255;
+  // let temp = 15;
+  let highColor = (1 - (props.temp - 12) / 28) * 255;
   let lowColor = highColor - 150;
   const Card = styled.div`
     margin: 0 auto;
@@ -28,7 +28,7 @@ const WeatherCard = (props) => {
     <Card>
       <Location />
       <Icon />
-      <Condition temp={temp} />
+      <Condition temp={props.temp} />
     </Card>
   );
 };
