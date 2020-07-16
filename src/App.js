@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./App.css";
 import WeatherCard from "./components/WeatherCard/component";
 
 function App() {
   const APPID = "";
-  const [query, setQuery] = useState("Adelaide, AU");
+  const [query, setQuery] = useState("Hobart, AU");
   const [weather, setWeather] = useState({
     city: null,
     country: null,
@@ -33,6 +33,17 @@ function App() {
       // console.log(res);
     });
   };
+  useEffect(() => {
+    data(query).then((res) => {
+      setWeather({
+        city: res.city.name,
+        country: res.city.country,
+        condition: res.list[0].weather[0].main,
+        temp: res.list[0].main.temp,
+      });
+      // console.log(res);
+    });
+  }, []);
   return (
     <div className="App">
       <WeatherCard
